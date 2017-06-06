@@ -4,21 +4,45 @@ var Link = require('react-router-dom').Link;
 var PropTypes = require('prop-types');
 
 var api = require('../utils/api');
+var PlayerPreview = require('./playerPreview');
+
+function Profile(props) {
+    var info = props.info;
+
+    return (
+        <PlayerPreview avatar={info.avatar_url} username={info.login}>
+            <ul className='space-list-items'>
+                {info.name && <li>{info.name}</li>}
+                {info.location && <li>{info.location}</li>}
+                {info.company && <li>{info.company}</li>}
+                <li>Followers: {info.followers}</li>
+                <li>Following: {info.following}</li>
+                <li>Public Repos: {info.public_repos}</li>
+                {info.blog && <li><a href={info.blog}>{info.blog}</a></li>}
+            </ul>
+        </PlayerPreview>
+    );
+}
+
+Profile.propTypes = {
+    info: PropTypes.object.isRequired
+};
 
 function Player(props) {
     return (
         <div>
             <h1 className='header'>{props.label}</h1>
-            <h3 style={{textalign: 'center'}}>Score: {props.score}</h3>
+            <h3 style={{textAlign: 'center'}}>Score: {props.score}</h3>
+            <Profile info={props.profile}/>
         </div>
-    )
+    );
 }
 
 Player.propTypes = {
     label: PropTypes.string.isRequired,
     score: PropTypes.number.isRequired,
     profile: PropTypes.object.isRequired,
-}
+};
 
 class Results extends React.Component {
 
@@ -30,7 +54,7 @@ class Results extends React.Component {
             loser: null,
             error: null,
             loading: true
-        }
+        };
     }
 
     componentDidMount() {
@@ -55,8 +79,8 @@ class Results extends React.Component {
                     winner: res[0],
                     loser: res[1],
                     loading: false
-                }
-            })
+                };
+            });
         });
     }
     render() {
@@ -75,7 +99,7 @@ class Results extends React.Component {
                     <p>{error}</p>
                     <Link to='/battle'>Reset</Link>
                 </div>
-            )
+            );
         }
 
         return (

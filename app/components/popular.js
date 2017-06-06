@@ -20,7 +20,7 @@ function SelectLanguage(props) {
                 );
             })}
         </ul>
-    )
+    );
 }
 
 SelectLanguage.propTypes = {
@@ -51,7 +51,7 @@ function RepoGrid(props) {
                 );
             })}
         </ul>
-    )
+    );
 }
 
 RepoGrid.propTypes = {
@@ -71,7 +71,7 @@ class Popular extends React.Component {
     }
 
     componentDidMount() {
-        this.updateLanguage(this.state.selectedLanguage)
+        this.updateLanguage(this.state.selectedLanguage);
     }
 
     updateLanguage(lang) {
@@ -79,7 +79,7 @@ class Popular extends React.Component {
             return {
                 selectedLanguage: lang,
                 repos: null
-            }
+            };
         });
 
         api.fetchPopularRepos(lang)
@@ -87,7 +87,7 @@ class Popular extends React.Component {
             this.setState(function() {
                 return {
                     repos: repos
-                }
+                };
             });
         });
     }
