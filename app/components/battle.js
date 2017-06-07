@@ -151,4 +151,8 @@ class Battle extends React.Component {
     }
 }
 
+Battle.propTypes = {
+    match: PropTypes.object.isRequired
+};
+
 module.exports = Battle;
